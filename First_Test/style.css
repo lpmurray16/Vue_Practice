@@ -1,0 +1,150 @@
+/* -- PRELIMINARY CSS --  */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Viaoda Libre', cursive;
+    color: rgb(0, 0, 0);
+}
+body::-wenkit-scrollbar {
+    width: 0.25rem;
+}
+body::-webkit-scrollbar-track {
+    background: rgb(223, 159, 75);
+}
+body::-webkit-scrollbar-thumb {
+    background: rgb(216, 124, 5);
+}
+
+p, span, #app li {
+    font-weight: 600;
+    letter-spacing: 0.9px;
+}
+.nav-bar img {
+    filter: invert;
+}
+#app img {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    padding: 1em;
+    border: 2px solid #808080;
+}
+
+.green {
+    color:seagreen;
+    text-decoration: underline;
+}
+/* -- END OF PRELIMINARY CSS -- */
+
+/* -- MAIN CONTENT SECTION --  */
+#app {
+    margin-top: 5rem;
+}
+
+.page_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* -- END OF MAIN CONTENT -- */
+
+/* --- NAVBAR ---- */
+.nav-bar {
+    position: fixed;
+    top: 0;
+    width:100%;
+    height: 4rem;
+    background: rgb(36, 36, 36);
+}
+#nav-list {
+    display: flex;
+    flex-flow: row nowrap;
+    height: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+.nav-item:last-child {
+    margin-left: auto;
+}
+.nav-link {
+    padding: 1em;
+    text-decoration: none;
+    transition: 460ms ease;
+    color: rgb(187, 187, 187);
+    width: 100%;
+}
+.nav-link:hover {
+    background: rgb(63, 63, 63);
+}
+
+/* --- END OF NAVBAR --- */
+
+
+/* -- PRODUCT CSS -- */
+.product {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    margin: 1rem;
+}
+
+.choices {
+    border: 1px solid black;
+    padding: 8px;
+    cursor: pointer;
+    background: none;
+    border-radius: 5px;
+}
+.choices:hover {
+    -webkit-box-shadow: 4px 10px 15px -1px rgba(0,0,0,0.47); 
+    box-shadow: 4px 10px 15px -1px rgba(0,0,0,0.47);
+}
+
+/* -- END OF PRODUCT -- */
+
+/* -- BUTTON CSS -- */
+button {
+    padding: 1rem;
+}
+.disabledButton {
+    background:rgb(175, 32, 32);
+}
+
+
+/* -- MEDIA QUERIES AND ANIMATIONS -- */
+@media (max-width: 767px) {
+    #app {
+        margin-top: 0rem;
+        width: 100%;
+    }
+    .nav-bar {
+        flex-flow: column;
+        width: 8rem;
+        height: 100vh;
+        left: 0;
+    }
+    #nav-list {
+        flex-flow: column nowrap;
+        width: 100%;
+        list-style: none;
+        height: 94vh;
+    }
+    .nav-item {
+        width: 100%;
+    }
+    .nav-item:last-child {
+        margin-top: auto;
+        margin-left: 0;
+    }
+}
