@@ -47,46 +47,7 @@
 
     <div id="app">
         <h1 class="page_title">The Magic Wand Shop</h1>
-        <div class="product">
-            <div class="product-image">
-                <a :href="ex_link" target="_blank"><img :src="product_image"/></a>
-            </div>
-            <div class="product-info">
-                <h2>{{ title }}</h2>
-                <p v-if="stock > 10">In Stock</p>
-                <p v-else-if="stock <= 10 && stock > 0">Almost sold out!</p>
-                <p v-else>Out of Stock</p>
-                <span class="green" v-if="onSale">On SALE!</span>
-
-                <ul>
-                    <li v-for="item in features">{{ item }}</li>
-                </ul>
-
-                <div v-for="(variant, index) in variants" 
-                    :key="variant.variantId"
-                    class="color-box">
-                    <p @click="updateProduct(index)" 
-                    class="choices" 
-                    :style="{ backgroundColor: variant.variantHex }">
-                    {{ variant.variantName }}
-                        <span>
-                            {{"- " + variant.variantColor}}
-                        </span>
-                    </p>
-                </div>
-
-                <div class="buttons">
-                    <button v-on:click="addToCart"
-                    :disabled="!InStock"
-                    :class="{ disabledButton: !InStock }">Add to Cart</button>
-                    <button v-on:click="removeFromCart">Remove From Cart</button>
-                </div>
-
-                <div class="cart">
-                    <p>Cart ( {{ cart }} )</p>
-                </div>
-            </div>
-        </div>
+        <product :premium="premium"></product>
     </div>
 
 
