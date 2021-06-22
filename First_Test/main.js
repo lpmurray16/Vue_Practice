@@ -43,10 +43,6 @@ Vue.component('product', {
                     :class="{ disabledButton: !InStock }">Add to Cart</button>
                     <button v-on:click="removeFromCart">Remove From Cart</button>
                 </div>
-
-                <div class="cart">
-                    <p>Cart ( {{ cart }} )</p>
-                </div>
             </div>
         </div>
     `,
@@ -55,7 +51,6 @@ Vue.component('product', {
             brand: 'Ollivanders',
             product: 'Magic Wand',
             selectedVariant: 0,
-            cart: 0,
             details: ["11 inches", "Holly","Phoenix Feather Core"],
             variants: [
                 {
@@ -86,15 +81,10 @@ Vue.component('product', {
     },
     methods: {
         addToCart() {
-            this.cart += 1
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId)
         },
         removeFromCart() {
-            if(this.cart === 0){
-                alert("The Cart is empty.")
-            } else {
-                this.cart -= 1
-            }
-            
+            this.$emit('remove-from-cart', this.variants[this.selectedVariant].variantId)
         },
         updateProduct(index) {
             this.selectedVariant = index
@@ -141,6 +131,19 @@ Vue.component('product', {
 var app = new Vue ({
     el: '#app',
     data: {
-        premium: true
+        premium: true,
+        cart: []
+    },
+    methods: {
+        updateCart(id) {
+            this.cart.push(id)
+        },
+        removeItem(id) {
+            if(this.cart.length === 0) {
+                alert("Cart is Empty")
+            } else {
+                this.cart.pop(id)
+            }
+        }
     }
 })
