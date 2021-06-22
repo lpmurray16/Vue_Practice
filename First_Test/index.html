@@ -53,21 +53,19 @@
             </div>
             <div class="product-info">
                 <h2>{{ title }}</h2>
-                <p v-if="inventory > 10">In Stock</p>
-                <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
+                <p v-if="stock > 10">In Stock</p>
+                <p v-else-if="stock <= 10 && stock > 0">Almost sold out!</p>
                 <p v-else>Out of Stock</p>
                 <span class="green" v-if="onSale">On SALE!</span>
 
                 <ul>
-                    <li v-for="detail in details">{{ detail }}</li>
+                    <li v-for="item in features">{{ item }}</li>
                 </ul>
 
-                <div v-for="variant in variants" 
+                <div v-for="(variant, index) in variants" 
                     :key="variant.variantId"
                     class="color-box">
-                    <p @click="updateProduct(variant.variantName, variant.variantLink, 
-                    variant.variantImage, 
-                    variant.variantDetails, variant.variantInventory)" 
+                    <p @click="updateProduct(index)" 
                     class="choices" 
                     :style="{ backgroundColor: variant.variantHex }">
                     {{ variant.variantName }}
@@ -77,10 +75,12 @@
                     </p>
                 </div>
 
-                <button v-on:click="addToCart" 
-                :disabled="!InStock"
-                :class="{ disabledButton: !InStock }">Add to Cart</button>
-                <button v-on:click="removeFromCart">Remove From Cart</button>
+                <div class="buttons">
+                    <button v-on:click="addToCart"
+                    :disabled="!InStock"
+                    :class="{ disabledButton: !InStock }">Add to Cart</button>
+                    <button v-on:click="removeFromCart">Remove From Cart</button>
+                </div>
 
                 <div class="cart">
                     <p>Cart ( {{ cart }} )</p>

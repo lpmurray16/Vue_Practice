@@ -3,12 +3,8 @@ var app = new Vue ({
     data: {
         brand: 'Ollivanders',
         product: 'Magic Wand',
-        product_image: 'assets/harrys_wand.jpg',
-        inventory: 0,
-        InStock: true,
-        onSale: true,
+        selectedVariant: 0,
         cart: 0,
-        ex_link: '#',
         details: ["11 inches", "Holly","Phoenix Feather Core"],
         variants: [
             {
@@ -18,7 +14,8 @@ var app = new Vue ({
                 variantColor: "Dark Brown & Grey",
                 variantDetails: ["11 inches", "Holly","Phoenix Feather Core"],
                 variantImage: "assets/harrys_wand.jpg",
-                variantInventory: 19,
+                variantInventory: 14,
+                variantOnSale: false,
                 variantLink: "https://harrypottershop.co.uk/collections/wands/products/harry-potters-wand"
             },
             {
@@ -29,6 +26,7 @@ var app = new Vue ({
                 variantDetails: ["10.75 inches", "Vine Wood","Dragon Heartstring Core"],
                 variantImage: "assets/hermione_wand.webp",
                 variantInventory: 9,
+                variantOnSale: true,
                 variantLink: "https://harrypottershop.co.uk/collections/wands/products/hermione-grangers-wand"
             }
         ]
@@ -46,22 +44,36 @@ var app = new Vue ({
             }
             
         },
-        updateProduct(variantName, variantLink, variantImage, variantDetails, variantInvenotry) {
-            this.product = variantName
-            this.product_image = variantImage
-            this.details = variantDetails
-            this.inventory = variantInvenotry  
-            if(variantInvenotry > 0){
-                this.InStock = true
-            } else {
-                this.InStock = false
-            }
-            this.ex_link = variantLink
+        updateProduct(index) {
+            this.selectedVariant = index
+            console.log(index)
         } 
     },
     computed: {
         title() {
-            return this.brand +' '+ this.product
+            return this.brand +' '+ this.variants[this.selectedVariant].variantName
+        },
+        product_image() {
+            return this.variants[this.selectedVariant].variantImage
+        },
+        InStock() {
+            return this.variants[this.selectedVariant].variantInventory > 0
+        },
+        stock() {
+            return this.variants[this.selectedVariant].variantInventory
+        },
+        features() {
+            return this.variants[this.selectedVariant].variantDetails
+        },
+        buttonColor() {
+            return this.variants[this.selectedVariant].variantHex
+        },
+        ex_link() {
+            return this.variants[this.selectedVariant].variantLink
+        },
+        onSale() {
+            return this.variants[this.selectedVariant].variantOnSale
         }
+
     }
 })
