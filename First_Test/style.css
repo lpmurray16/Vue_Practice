@@ -1,6 +1,11 @@
 /* -- PRELIMINARY CSS --  */
 html {
     scroll-behavior: smooth;
+    background:url('assets/diagon-alley.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 body {
@@ -8,16 +13,16 @@ body {
     padding: 0;
     height: 100vh;
     font-family: 'Viaoda Libre', cursive;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
-body::-wenkit-scrollbar {
+body::-webkit-scrollbar {
     width: 0.25rem;
 }
 body::-webkit-scrollbar-track {
-    background: rgb(223, 159, 75);
+    background: #383838;
 }
 body::-webkit-scrollbar-thumb {
-    background: rgb(216, 124, 5);
+    background: #b35c22;
 }
 
 p, span, #app li {
@@ -33,9 +38,12 @@ p, span, #app li {
     border: 2px solid #808080;
 }
 
-.green {
-    color:seagreen;
+.green { /* for the SALE element */
+    color: seagreen;
+    padding: 4px;
+    background: #fff;
     text-decoration: underline;
+    border-radius: 5px;
 }
 /* -- END OF PRELIMINARY CSS -- */
 
@@ -48,6 +56,7 @@ p, span, #app li {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 0.3em;
 }
 /* -- END OF MAIN CONTENT -- */
 
@@ -75,6 +84,7 @@ p, span, #app li {
 }
 .nav-item:last-child {
     margin-left: auto;
+    background:#b35c22;
 }
 .nav-link {
     padding: 1em;
@@ -96,10 +106,13 @@ p, span, #app li {
     flex-flow: row wrap;
     justify-content: space-evenly;
     margin: 1rem;
-    gap: 1.8em;
 }
 .product-image {
     max-width: 450px;
+}
+.product-info {
+    padding: 16px;
+    background: #00000061;
 }
 .choices {
     border: 1px solid black;
@@ -120,13 +133,21 @@ p, span, #app li {
     position: absolute;
     top: 75px;
     right: 18px;
-    border: 2px solid black;
+    border: 2px solid #b35c22;
     border-radius: 5px;
     padding: 0 0.5em;
     z-index: 9;
 }
 /* -- END OF CART CSS -- */
 
+/* -- REVIEW FORM CSS -- */
+form.review-form p {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px;
+}
+/* -- END OF REVIEW FORM CSS -- */
 
 /* -- BUTTON CSS -- */
 button {
@@ -135,9 +156,14 @@ button {
 .disabledButton {
     background:rgb(175, 32, 32);
 }
+/* -- END OF BUTTON CSS -- */
 
-
-/* -- MEDIA QUERIES AND ANIMATIONS -- */
+/* -- START MEDIA QUERIES AND ANIMATIONS -- */
+@media (max-width: 785px) and (min-width: 767px) {
+    .product-info {
+        width: 90%
+    }
+}
 @media (max-width: 767px) { /* tablets and such */
     body {
         margin-left: 8rem;
@@ -164,7 +190,7 @@ button {
     .nav-item:last-child {
         margin-top: auto;
         margin-left: 0;
-        background:#ea6035;
+        background:#b35c22;
     }
     .nav-item:last-child a {
         color: #000;
@@ -183,18 +209,24 @@ button {
         padding: 0 0.5em;
         margin: 0 auto;
     }
+    .product-info {
+        width: 80%;
+    }
     .buttons {
         display: flex;
         gap: 1em;
     }
 }
 
-@media (max-width: 430px) { /* smart phones and such */
+@media (max-width: 450px) { /* smart phones and such */
     .page_title {
         font-size: 28px;
         padding: 0 8px;
     }
     #app img {
         width: 87%;
+    }
+    .product-info {
+        width: 100%;
     }
 }
