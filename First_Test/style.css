@@ -104,7 +104,7 @@ p, span, #app li {
 .product {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     margin: 1rem;
 }
 .product-image {
@@ -112,6 +112,9 @@ p, span, #app li {
 }
 .product-info {
     padding: 16px;
+    min-width: 200px;
+    width: 100%;
+    max-width: 400px;
     background: #00000061;
 }
 .choices {
@@ -146,6 +149,13 @@ form.review-form p {
     justify-content: flex-start;
     align-items: center;
     gap: 6px;
+}
+form.review-form {
+    padding: 0 4em;
+}
+.shown-reviews {
+    padding: 2em 4em;
+    background-color: #adadad21;
 }
 /* -- END OF REVIEW FORM CSS -- */
 
