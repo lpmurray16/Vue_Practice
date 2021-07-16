@@ -82,51 +82,60 @@ Vue.component('product', {
             <div class="product-image">
                 <a :href="ex_link" target="_blank"><img :src="product_image"/></a>
             </div>
+            
             <div class="product-info">
-                <h2>{{ title }}</h2>
-                <p v-if="stock > 10">In Stock</p>
-                <p v-else-if="stock <= 10 && stock > 0">Almost sold out!</p>
-                <p v-else>Out of Stock</p>
-                <p>Shipping: {{ shipping }}</p>
-                <span class="green" v-if="onSale">On SALE!</span>
+                <div class="wrap__name__variants--outter">
+                    <div class="product_name_details">
+                        <h2>{{ title }}</h2>
+                        <p v-if="stock > 10">In Stock</p>
+                        <p v-else-if="stock <= 10 && stock > 0">Almost sold out!</p>
+                        <p v-else>Out of Stock</p>
+                        <p>Shipping: {{ shipping }}</p>
+                        <span class="green" v-if="onSale">On SALE!</span>
 
-                <ul>
-                    <li v-for="item in features">{{ item }}</li>
-                </ul>
-
-                <div v-for="(variant, index) in variants" 
-                    :key="variant.variantId"
-                    class="color-box">
-                    <p @click="updateProduct(index)" 
-                    class="choices" 
-                    :style="{ backgroundColor: variant.variantHex }">
-                    {{ variant.variantName }}
-                        <span>
-                            {{"- " + variant.variantColor}}
-                        </span>
-                    </p>
-                </div>
-
-                <div class="buttons">
-                    <button v-on:click="addToCart"
-                    :disabled="!InStock"
-                    :class="{ disabledButton: !InStock }">Add to Cart</button>
-                    <button v-on:click="removeFromCart">Remove From Cart</button>
+                        <ul>
+                            <li v-for="item in features">{{ item }}</li>
+                        </ul>
+                        <div class="buttons">
+                            <button v-on:click="addToCart"
+                                :disabled="!InStock"
+                                :class="{ disabledButton: !InStock }">Add to Cart</button>
+                            <button v-on:click="removeFromCart">Remove From Cart</button>
+                        </div>
+                    </div>
+                    <div class="wrap__variants">
+                        <h2>Item Options:</h2>
+                        <div v-for="(variant, index) in variants" 
+                            :key="variant.variantId"
+                            class="color-box">
+                            <p @click="updateProduct(index)" 
+                            class="choices" 
+                            :style="{ backgroundColor: variant.variantHex }">
+                            {{ variant.variantName }}
+                                <span>
+                                    {{"- " + variant.variantColor}}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 
-                <product-review @review-submitted="addReview"></product-review>
+                <div class="wrap__reviews">
+                    <product-review @review-submitted="addReview"></product-review>
 
-                <div class="shown-reviews">
-                    <h2>Reviews</h2>
-                    <p v-if="!reviews.length">There are no reviews yet.</p>
-                    <ul>
-                        <li v-for="review in reviews">
-                            <p>{{ review.name }}</p>
-                            <p>Rating: {{ review.rating + " out of 5" }}</p>
-                            <p>{{'"'+ review.review + '"'}}</p>
-                        </li>
-                    </ul>
+                    <div class="shown-reviews">
+                        <h2>Reviews</h2>
+                        <p v-if="!reviews.length">There are no reviews yet.</p>
+                        <ul>
+                            <li v-for="review in reviews">
+                                <p>{{ review.name }}</p>
+                                <p>Rating: {{ review.rating + " out of 5" }}</p>
+                                <p>{{'"'+ review.review + '"'}}</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+
             </div>
         </div>
     `,
