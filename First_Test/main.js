@@ -1,4 +1,6 @@
 // Practicing with Vue.js -- Logan Murray June 2021
+var eventBus = new Vue()
+
 Vue.component('product-review', {
     template: `
     <form class="review-form" @submit.prevent="onSubmit">
@@ -54,7 +56,7 @@ Vue.component('product-review', {
                     review: this.review,
                     rating: this.rating
                 }
-                this.$emit('review-submitted', productReview)
+                eventBus.$emit('review-submitted', productReview)
                 this.name = null
                 this.review = null
                 this.rating = null
@@ -120,21 +122,9 @@ Vue.component('product', {
                     </div>
                 </div>
                 
-                <div class="wrap__reviews">
-                    <product-review @review-submitted="addReview"></product-review>
+                <product-tabs :reviews="reviews"></product-tabs>
 
-                    <div class="shown-reviews">
-                        <h2>Reviews</h2>
-                        <p v-if="!reviews.length">There are no reviews yet.</p>
-                        <ul>
-                            <li v-for="review in reviews">
-                                <p>{{ review.name }}</p>
-                                <p>Rating: {{ review.rating + " out of 5" }}</p>
-                                <p>{{'"'+ review.review + '"'}}</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                
 
             </div>
         </div>
@@ -184,9 +174,7 @@ Vue.component('product', {
             this.selectedVariant = index
             console.log(index)
         },
-        addReview(productReview) {
-            this.reviews.push(productReview)
-        }
+
     },
     computed: {
         title() {
@@ -221,6 +209,54 @@ Vue.component('product', {
             }
         }
 
+    },
+    mounted() {
+        eventBus.$on('review-submitted', productReview => {
+            this.reviews.push(productReview)
+        })
+    }
+})
+
+Vue.component('product-tabs', {
+    props: {
+        reviews: {
+            type: Array,
+            required: true
+        }
+    },
+    template: `
+    <div class="wrapper__tabs">
+        <div class="tabs--inner">
+            <span class='tab'
+                :class='{ activeTab : selectedTab === tab }'
+                v-for='(tab, index) in tabs' 
+                :key='index' 
+                @click='selectedTab = tab'>
+                {{ tab }}
+            </span>
+        </div>
+
+        <div class='wrap__reviews'>
+            <product-review v-show='selectedTab === "Write a Review"'></product-review>
+
+            <div class='shown-reviews' v-show='selectedTab === "Reviews"'>
+                <p v-if="!reviews.length">There are no reviews yet.</p>
+                <ul>
+                    <li v-for="review in reviews">
+                        <p>{{ review.name }}</p>
+                        <p>Rating: {{ review.rating + " out of 5" }}</p>
+                        <p>{{'"'+ review.review + '"'}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    `,
+    data() {
+        return {
+            tabs: ['Reviews', 'Write a Review'],
+            selectedTab: 'Reviews'
+        }
     }
 })
 

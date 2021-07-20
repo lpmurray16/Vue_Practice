@@ -127,6 +127,7 @@ h1 {
     min-width: 200px;
     width: 100%;
     max-width: 1140px;
+    margin-bottom: 2em;
     background: rgb(0 0 0 / 68%);
 }
 .choices {
@@ -178,6 +179,17 @@ form.review-form {
 .shown-reviews {
     padding: 1em;
     background-color: #adadad21;
+}
+
+/* Tabs */
+.tab {
+    margin: 2px 16px;
+}
+.activeTab {
+    text-decoration: underline #b35c22 2px;
+}
+.tabs--inner {
+    text-align: center;
 }
 /* -- END OF REVIEW FORM CSS -- */
 
